@@ -1,9 +1,9 @@
-import User from "../models/user";
+import User from "../models/user.js";
 
 async function createUser(req, res) {
-    const { name, surname, email, phoneNumber } = req.body;
+    const { name, surName, email, phoneNumber } = req.body;
 
-    if (!name || !surname || !email || !phoneNumber) {
+    if (!name || !surName || !email || !phoneNumber) {
         return res.status(404).json({
             message: "Provide all values please!",
         });
@@ -11,7 +11,7 @@ async function createUser(req, res) {
 
     const user = await User.create({
         name,
-        surname,
+        surName,
         email,
         phoneNumber,
     });
@@ -22,7 +22,7 @@ async function createUser(req, res) {
         });
     }
 
-    res.status(101).json(user);
+    res.status(101).json({ message: "user created", user });
 }
 async function getAllUsers(req, res) {
     console.log("users: ");
